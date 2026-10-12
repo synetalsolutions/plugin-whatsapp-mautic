@@ -1,0 +1,18 @@
+{% block _config_whatsappconfig_widget %}
+<h4 class="fw-sb mt-48 mb-xs">{{ 'mautic.config.tab.whatsappconfig'|trans }}</h4>
+<div class="text-muted small pb-md">{{ 'mautic.whatsapp.config.help'|trans }}</div>
+<div class="row">
+    <div class="panel panel-default mb-md">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12">{{ formRowIfExists(form, 'whatsapp_access_token') }}</div>
+                <div class="col-xs-12">{{ formRowIfExists(form, 'whatsapp_waba_id') }}</div>
+                <div class="col-xs-12">{{ formRowIfExists(form, 'whatsapp_phone_number_id') }}</div>
+                <div class="col-xs-12">{{ formRowIfExists(form, 'whatsapp_api_version') }}</div>
+                <div class="col-xs-12">{{ formRowIfExists(form, 'whatsapp_webhook_verify_token') }}</div>
+                <div class="col-xs-12">{{ formRowIfExists(form, 'whatsapp_app_secret') }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

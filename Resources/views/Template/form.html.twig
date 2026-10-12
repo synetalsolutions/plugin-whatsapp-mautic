@@ -1,0 +1,53 @@
+{% extends '@MauticCore/Default/content.html.twig' %}
+
+{% block mauticContent %}whatsapp{% endblock %}
+
+{% block headerTitle %}
+  {% if entity.id %}
+    {{ 'mautic.whatsapp.edit'|trans({'%name%': entity.name}) }}
+  {% else %}
+    {{ 'mautic.whatsapp.new'|trans }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {{ form_start(form) }}
+    <div class="box-layout">
+        <div class="col-md-9 height-auto bdr-r pa-md">
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.name) }}</div>
+                <div class="col-md-6">{{ form_row(form.templateName) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.language) }}</div>
+                <div class="col-md-6">{{ form_row(form.category) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.description) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.headerText) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.body) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.examples) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">{{ form_row(form.footer) }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.buttonText) }}</div>
+                <div class="col-md-6">{{ form_row(form.buttonUrl) }}</div>
+            </div>
+        </div>
+        <div class="col-md-3 height-auto">
+            <div class="pr-lg pl-lg pt-md pb-md">
+                {{ form_row(form.isPublished) }}
+            </div>
+        </div>
+    </div>
+    {{ form_row(form.buttons) }}
+  {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,33 @@
+{
+    "name": "synetalsolutions/plugin-whatsapp",
+    "description": "Create WhatsApp message templates in Mautic and manage them through the API and the Meta WhatsApp Cloud API.",
+    "type": "mautic-plugin",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "mautic",
+        "plugin",
+        "whatsapp",
+        "marketing",
+        "meta"
+    ],
+    "authors": [
+        {
+            "name": "Synetal Solutions",
+            "homepage": "https://synetalsolutions.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "mautic/core-lib": "^7.0"
+    },
+    "extra": {
+        "install-directory-name": "MauticWhatsAppBundle"
+    },
+    "autoload": {
+        "psr-4": {
+            "MauticPlugin\\MauticWhatsAppBundle\\": ""
+        }
+    }
+}

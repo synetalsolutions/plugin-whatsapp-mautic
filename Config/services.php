@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+use Mautic\CoreBundle\DependencyInjection\MauticCoreExtension;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
+return function (ContainerConfigurator $configurator): void {
+    $services = $configurator->services()
+        ->defaults()
+        ->autowire()
+        ->autoconfigure()
+        ->public();
+
+    $services->load('MauticPlugin\\MauticWhatsAppBundle\\', '../')
+        ->exclude('../{'.implode(',', MauticCoreExtension::DEFAULT_EXCLUDES).'}');
+
+    $services->load('MauticPlugin\\MauticWhatsAppBundle\\Entity\\', '../Entity/*Repository.php')
+        ->tag(Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\ServiceRepositoryCompilerPass::REPOSITORY_SERVICE_TAG);
+
+    $services->alias('mautic.whatsapp.model.whatsapp', MauticPlugin\MauticWhatsAppBundle\Model\WhatsAppTemplateModel::class);
+};

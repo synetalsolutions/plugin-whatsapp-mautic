@@ -1,0 +1,67 @@
+{% extends '@MauticCore/Default/content.html.twig' %}
+
+{% block mauticContent %}whatsapp{% endblock %}
+
+{% block headerTitle %}{{ item.name }}{% endblock %}
+
+{% block actions %}
+    {{ include('@MauticCore/Helper/page_actions.html.twig', {
+        'item': item,
+        'templateButtons': {
+            'edit': securityHasEntityAccess(permissions['whatsapp:templates:editown'], permissions['whatsapp:templates:editother'], item.createdBy),
+            'delete': securityHasEntityAccess(permissions['whatsapp:templates:deleteown'], permissions['whatsapp:templates:deleteother'], item.createdBy),
+        },
+        'routeBase': 'whatsapp',
+        'customButtons': [
+            {
+                'attr': {
+                    'data-toggle': 'ajax',
+                    'href': path('mautic_whatsapp_action', {'objectAction': 'submit', 'objectId': item.id}),
+                },
+                'iconClass': 'ri-send-plane-line',
+                'btnText': 'mautic.whatsapp.submit',
+            },
+            {
+                'attr': {
+                    'data-toggle': 'ajax',
+                    'href': path('mautic_whatsapp_action', {'objectAction': 'sync', 'objectId': item.id}),
+                },
+                'iconClass': 'ri-refresh-line',
+                'btnText': 'mautic.whatsapp.sync',
+            }
+        ]
+    }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="box-layout">
+        <div class="col-md-9 height-auto pa-md">
+            <div class="mb-md">
+                <span class="label label-default">{{ item.metaStatus }}</span>
+                <span class="label label-primary">{{ item.category }}</span>
+                <span class="label label-success">{{ item.language }}</span>
+            </div>
+            {% if item.metaError %}
+                <div class="alert alert-danger">{{ item.metaError }}</div>
+            {% endif %}
+            {% if item.headerText %}
+                <h3>{{ item.headerText }}</h3>
+            {% endif %}
+            <pre style="white-space:pre-wrap;">{{ item.body }}</pre>
+            {% if item.footer %}
+                <p class="text-muted">{{ item.footer }}</p>
+            {% endif %}
+            {% if item.buttonText %}
+                <p><span class="label label-info">{{ item.buttonText }}</span> {{ item.buttonUrl }}</p>
+            {% endif %}
+        </div>
+        <div class="col-md-3 bdr-l height-auto">
+            <div class="pr-lg pl-lg pt-md pb-md">
+                <h5>{{ 'mautic.whatsapp.meta'|trans }}</h5>
+                <p><strong>{{ 'mautic.whatsapp.template_name'|trans }}:</strong> {{ item.templateName }}</p>
+                <p><strong>{{ 'mautic.whatsapp.meta_id'|trans }}:</strong> {{ item.metaId|default('—') }}</p>
+                <p><strong>{{ 'mautic.whatsapp.meta_status'|trans }}:</strong> {{ item.metaStatus }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
